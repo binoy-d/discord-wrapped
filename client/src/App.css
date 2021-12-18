@@ -3,9 +3,10 @@
   --discord-blue-accent: #7289DA;
   --discord-full-white: #ffffff;
   --discord-dark-grey: #2C2F33;
-  --dsicord-darker-grey: #23272A;
+  --discord-darker-grey: #23272A;
 }
 
 body,html{
-  background-color: var(--discord-dark-grey);
+  background-color: var(--discord-darker-grey);
+  color: var(--discord-full-white);
 }
