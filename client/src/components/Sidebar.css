@@ -4,8 +4,7 @@
     left: 0;
     background-color: var(--discord-dark-grey);
     width:15vw; /*change this to be responsive*/
-    height:100vh;
-    
+    height:100vh;    
 }
 
 .d-sidebar-banner{
@@ -18,12 +17,16 @@
     margin-bottom:2em;
 }
 
+.d-sidebar-headingitem{
+    font-size:large;
+    font-weight:bold;
+    padding-top:1em;
+}
+
 .d-sidebar-item{
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     padding-left: 2em;
-    font-size:large;
-    font-weight:bold;
     transition: all 0.2s ease-in;
 }
 
@@ -32,3 +35,18 @@
     cursor:pointer;
 }
 
+
+
+.d-sidebar-subitem{
+    padding-left:3em;
+}
+
+.d-sidebar-link{
+    color:var(--discord-full-white);
+    text-decoration: none;
+}
+
+.d-sidebar-link:hover{
+    color:var(--discord-full-white);
+    text-decoration: none;
+}
