@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sidebar.css';
-
+import { Link } from "react-router-dom";
 
 
 const data = {
@@ -13,27 +13,37 @@ function Sidebar() {
             <div className="d-sidebar-banner">
                 Insert banner here?
             </div>
-            <div className="d-sidebar-item">
-                Home
-            </div>
-            <div className="d-sidebar-item">
-                Channels
-            </div>
+            <Link className="d-sidebar-link" to="/">
+                <div className="d-sidebar-item d-sidebar-headingitem">
+                    Home
+                </div>
+            </Link>
+            <Link className="d-sidebar-link" to="/channels">
+                <div className="d-sidebar-item d-sidebar-headingitem">
+                    Channels
+                </div>
+            </Link>
             {
-                data.channels.forEach((name, i) =>
-                    <div className="d-sidbar-subitem">
-                        {name}
-                    </div>
+                data.channels.map((name, i) =>
+                    <Link className="d-sidebar-link" to={`/channels/${name}`}>
+                        <div className="d-sidebar-item d-sidebar-subitem">
+                            #{name}
+                        </div>
+                    </Link>
                 )
             }
-            <div className="d-sidebar-item">
-                Members
-            </div>
+            <Link className="d-sidebar-link" to="/members">
+                <div className="d-sidebar-item d-sidebar-headingitem">
+                    Members
+                </div>
+            </Link>
             {
-                data.members.forEach((name, i) =>
-                    <div className="d-sidbar-subitem">
-                        {name}
-                    </div>
+                data.members.map((name, i) =>
+                    <Link className="d-sidebar-link" to={`/members/${name}`}>
+                        <div className="d-sidebar-item d-sidebar-subitem">
+                            @{name}
+                        </div>
+                    </Link>
                 )
             }
         </div>
