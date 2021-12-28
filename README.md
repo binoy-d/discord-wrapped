@@ -4,7 +4,7 @@ server through pretty graphs and interactive widgets.
 
 ## Contributors
 - Daniel Binoy
-- 
+- Atul Nair 
 - <add your names here to prove you know basic git>
 
 
