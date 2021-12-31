@@ -10,6 +10,7 @@ const MessageBubble = ({ msg, scale}) =>
         top: msg.y +"vh",
     }}>
         <p className="d-bubble-text">{msg.content}</p>
+        <div className="d-bubble-background"></div>
     </div>
 
 function LandingPage() {
