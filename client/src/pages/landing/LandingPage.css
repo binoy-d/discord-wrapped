@@ -1,0 +1,16 @@
+.landing-title {
+    position:absolute;
+    top:25vh;
+    height:50vh;
+    left:1em;
+    font-size:4em;
+}
+
+
+.d-message-bubble{
+    background-color: rgba(255, 255, 255, 0.25);
+    width:fit-content;
+    padding:1em;
+    border-radius: 1em;
+    margin:0.5em;
+}
