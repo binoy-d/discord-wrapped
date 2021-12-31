@@ -1,5 +1,6 @@
 .d-sidebar{
     position:absolute;
+    z-index:10000;
     top: 0;
     left: 0;
     background-color: var(--discord-dark-grey);
@@ -49,4 +50,37 @@
 .d-sidebar-link:hover{
     color:var(--discord-full-white);
     text-decoration: none;
+}
+
+.closed-sidebar-btn{
+    background-color: transparent;
+    border-color: transparent;
+    opacity: 60%;
+    color:var(--discord-full-white);
+    top:0.5em;
+    left:1em;
+    position: absolute;
+    font-size: 1.4em;
+    transition: all 0.1s ease-in;
+}
+
+
+.closed-sidebar-btn:hover{
+    opacity:100%;
+}
+
+.opened-sidebar-btn{
+    position: absolute;
+    top:0.5em;
+    right:1em;
+    opacity: 60%;
+    transition: all 0.1s ease-in;
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 1.4em;
+    color:var(--discord-full-white);
+}
+
+.opened-sidebar-btn:hover{
+    opacity: 100%;
 }

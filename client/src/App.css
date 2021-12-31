@@ -9,4 +9,5 @@
 body,html{
   background-color: var(--discord-darker-grey);
   color: var(--discord-full-white);
+  overflow-x: hidden;
 }

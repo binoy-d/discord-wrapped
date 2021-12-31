@@ -1,0 +1,39 @@
+.landing-title {
+    position:absolute;
+    top:25vh;
+    height:50vh;
+    left:1em;
+    font-size:4em;
+}
+
+.d-message-bubble{
+    background-color: rgba(255, 255, 255, 0.171);
+    width:fit-content;
+    padding:1em;
+    border-radius: 1em;
+    margin:0.5em;
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+    top:25vh;
+    backdrop-filter: blur(20px);
+    left:50vw;
+    box-shadow: inset 0px 0px 10px 10px #ffffff46;
+    animation: float 6s ease-in-out infinite;
+}
+
+
+.d-bubble-text{
+    color:var(--discord-full-white);
+}
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
