@@ -1,6 +1,6 @@
 import './App.css';
 import Sidebar from './components/Sidebar';
-import HomePage from './pages/home/HomePage';
+import MainPage from './pages/main/MainPage';
 import ChannelPage from './pages/channel/ChannelPage';
 import MemberPage from './pages/member/MemberPage';
 import ChannelStatsPage from './pages/channelstats/ChannelStatsPage';
@@ -11,7 +11,7 @@ function App() {
   return (
       <Routes>
         <Route path="/" element={<PageLayout />}>
-          <Route index element={<HomePage />} />
+          <Route index element={<MainPage />} />
           <Route path="/channels/:id" element={<ChannelPage />} />
           <Route path="/members/:id" element={<MemberPage />} />
           <Route path="channels" element={<ChannelStatsPage />} />
