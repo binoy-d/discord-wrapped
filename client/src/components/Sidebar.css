@@ -4,7 +4,9 @@
     top: 0;
     left: 0;
     background-color: var(--discord-dark-grey);
+    transform:translateX(0%);
     width:15vw; /*change this to be responsive*/
+    transition: all 0.2s ease-in;
     height:100vh;    
 }
 
@@ -83,4 +85,13 @@
 
 .opened-sidebar-btn:hover{
     opacity: 100%;
+}
+
+
+.open-sidebar{
+    transform:translateX(0%);
+}
+
+.closed-sidebar{
+    transform:translateX(-50%);
 }
