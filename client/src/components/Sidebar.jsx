@@ -17,8 +17,8 @@ const ClosedSidebar = ({handleClosedButtonClick}) =>
 
 
 
-const OpenSidebar = ({handleOpenedButtonClick}) =>
-    <div className="d-sidebar">
+const OpenSidebar = ({handleOpenedButtonClick, isOpen}) =>
+    <div className={"d-sidebar "+(isOpen?"open-sidebar":"closed-sidebar")}>
         <div className="d-sidebar-banner">
             banner?
             <button className="opened-sidebar-btn" onClick = {handleOpenedButtonClick}>
@@ -76,7 +76,7 @@ function Sidebar() {
     }
 
     return (
-        open?<OpenSidebar handleOpenedButtonClick = {handleOpenedButtonClick} />:<ClosedSidebar handleClosedButtonClick={handleClosedButtonClick}/>
+        open?<OpenSidebar isOpen={open} handleOpenedButtonClick = {handleOpenedButtonClick} />:<ClosedSidebar handleClosedButtonClick={handleClosedButtonClick}/>
     );
 }
 
