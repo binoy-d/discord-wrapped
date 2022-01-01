@@ -8,7 +8,8 @@ const MessageBubble = ({ msg, x, y, scale, i}) =>
         position: "absolute",
         left: x +"vw",
         top: y +"vh",
-        animationDuration: 8/scale+"s"
+        animationDuration: 8/scale+"s",
+        opacity: scale/1.5
     }}>
         <FaDiscord size={20+scale*20} className="message-discord-icon"  />
         <p className="d-bubble-text" style={{fontSize:scale+"em"}}>"{msg}"</p>
@@ -31,14 +32,17 @@ function LandingPage() {
         <div className="LandingPage">
             <h1 className=" landing-title ">
                 It's been an <br />
-                <strong>interesting year</strong>
+                <strong> <i>interesting</i> year</strong>
                 <br /> for the {serverName} <br />
                 Server
             </h1>
-            <MessageBubble i={0} msg={messages[0]} scale={2.5} x={30} y = {45} />
-            <MessageBubble i={0} msg={messages[1]} scale={1.5} x={70} y = {10} />
+            <button className="main-start-button btn">See More</button>
+            
+            <MessageBubble i={0} msg={messages[4]} scale={0.5} x={30} y = {80} />
+            <MessageBubble i={0} msg={messages[1]} scale={1.25} x={70} y = {10} />
             <MessageBubble i={0} msg={messages[2]} scale={1} x={40} y = {20} />
             <MessageBubble i={0} msg={messages[3]} scale={1} x={60} y = {80} />
+            <MessageBubble i={0} msg={messages[0]} scale={2.5} x={30} y = {45} />
             
         </div>
     );
