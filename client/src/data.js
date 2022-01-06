@@ -1,4 +1,6 @@
 import faker from "faker";
+export const messages = require('./messages.json');
+
 
 export const filler_messages = [
     "Tiddies",
