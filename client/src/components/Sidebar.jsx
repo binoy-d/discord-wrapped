@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {AiOutlineMenu, AiOutlineClose} from "react-icons/ai";
 import './Sidebar.css';
 import { Link } from "react-router-dom";
-
+import {messages} from "../data";
 
 const data = {
     "members": ["user1", "user2", "user3"],
@@ -20,12 +20,15 @@ const ClosedSidebar = ({handleClosedButtonClick}) =>
 const OpenSidebar = ({handleOpenedButtonClick, isOpen}) =>
     <div className={"d-sidebar "+(isOpen?"open-sidebar":"closed-sidebar")}>
         <div className="d-sidebar-banner">
+            <Link className="d-sidebar-link" to = "/">
             banner?
+            </Link>
+            
             <button className="opened-sidebar-btn" onClick = {handleOpenedButtonClick}>
                 <AiOutlineClose />
             </button>
         </div>
-        <Link className="d-sidebar-link" to="/">
+        <Link className="d-sidebar-link" to="/home">
             <div className="d-sidebar-item d-sidebar-headingitem">
                 Home
             </div>
@@ -50,7 +53,7 @@ const OpenSidebar = ({handleOpenedButtonClick, isOpen}) =>
             </div>
         </Link>
         {
-            data.members.map((name, i) =>
+            data.members.slice(0,5).map((name, i) =>
                 <Link className="d-sidebar-link" to={`/members/${name}`} key={"sidebar-member-"+i}>
                     <div className="d-sidebar-item d-sidebar-subitem">
                         @{name}
@@ -59,6 +62,7 @@ const OpenSidebar = ({handleOpenedButtonClick, isOpen}) =>
             )
         }
     </div>
+
 
 
 function Sidebar() {
@@ -73,7 +77,18 @@ function Sidebar() {
     const handleOpenedButtonClick = (e) => {
         e.preventDefault();
         setOpen(false);
-    }
+    };
+
+
+    useEffect(
+        ()=>{
+            const authors = new Set(messages.messages.map(m=>
+                m.author.name));
+                data.members = Array.from(authors);
+            console.log(authors);
+        }, []);
+            
+
 
     return (
         open?<OpenSidebar isOpen={open} handleOpenedButtonClick = {handleOpenedButtonClick} />:<ClosedSidebar handleClosedButtonClick={handleClosedButtonClick}/>

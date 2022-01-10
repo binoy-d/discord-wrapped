@@ -13,6 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<PageLayout />}>
           <Route index element={<LandingPage />} />
+          
+        <Route path="/home" element={<MainPage />}></Route>
           <Route path="/channels/:id" element={<ChannelPage />} />
           <Route path="/members/:id" element={<MemberPage />} />
           <Route path="channels" element={<ChannelStatsPage />} />
