@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import './LandingPage.css';
-import { filler_messages } from "../../data";
 import {FaDiscord} from "react-icons/fa"
 
 const MessageBubble = ({ msg, x, y, scale, i}) =>
@@ -24,8 +24,11 @@ function LandingPage() {
     useEffect(() => {
         //get numMessages random messages from filler messages
         //replace this with something fancy later
-        const sample = filler_messages.sort(() => 0.5 - Math.random()).slice(0, numMessages);
-        setMessages(sample);
+        axios.get("http://localhost:5000/bubble_messages")
+        .then((response)=> {
+            const sample = response.data.messages.sort(() => 0.5 - Math.random()).slice(0, numMessages);    
+            setMessages(sample);
+        })
     }, []);
 
     return (

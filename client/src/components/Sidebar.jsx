@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {AiOutlineMenu, AiOutlineClose} from "react-icons/ai";
-import './Sidebar.css';
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import './Sidebar.css';
 
 
 const data = {
@@ -17,7 +18,7 @@ const ClosedSidebar = ({handleClosedButtonClick}) =>
 
 
 
-const OpenSidebar = ({handleOpenedButtonClick, isOpen}) =>
+const OpenSidebar = ({handleOpenedButtonClick, isOpen, members}) =>
     <div className={"d-sidebar "+(isOpen?"open-sidebar":"closed-sidebar")}>
         <div className="d-sidebar-banner">
             banner?
@@ -50,7 +51,7 @@ const OpenSidebar = ({handleOpenedButtonClick, isOpen}) =>
             </div>
         </Link>
         {
-            data.members.map((name, i) =>
+            members.names.map((name, i) =>
                 <Link className="d-sidebar-link" to={`/members/${name}`} key={"sidebar-member-"+i}>
                     <div className="d-sidebar-item d-sidebar-subitem">
                         @{name}
@@ -64,6 +65,8 @@ const OpenSidebar = ({handleOpenedButtonClick, isOpen}) =>
 function Sidebar() {
 
     const [open, setOpen] = useState(false);
+    const [members, setMembers] = useState([]);
+
 
     const handleClosedButtonClick = (e) => {
         e.preventDefault();
@@ -75,8 +78,16 @@ function Sidebar() {
         setOpen(false);
     }
 
+    useEffect(()=> {
+        axios.get("http://localhost:5000/members")
+        .then((response)=>{
+            setMembers(response.data)
+        })
+
+    }, []);
+
     return (
-        open?<OpenSidebar isOpen={open} handleOpenedButtonClick = {handleOpenedButtonClick} />:<ClosedSidebar handleClosedButtonClick={handleClosedButtonClick}/>
+        open?<OpenSidebar isOpen={open} handleOpenedButtonClick = {handleOpenedButtonClick} members={members} />:<ClosedSidebar handleClosedButtonClick={handleClosedButtonClick}/>
     );
 }
 
