@@ -82,14 +82,6 @@ function Sidebar() {
         setOpen(false);
     };
 
-
-    useEffect(
-        ()=>{
-            const authors = new Set(messages.messages.map(m=>
-                m.author.name));
-                data.members = Array.from(authors);
-            console.log(authors);
-        }, []);
             
 
 
