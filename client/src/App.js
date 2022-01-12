@@ -11,9 +11,9 @@ import { Routes, Route, Outlet} from "react-router-dom";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<PageLayout/>}>
+      <Route path="/" element={<PageLayout/> } >
         <Route index element={<LandingPage />} />
-        <Route path="/home" element={<MainPage  />}></Route>
+        <Route path="/overview" element={<MainPage  />} />
         <Route path="/channels/:id" element={<ChannelPage  />} />
         <Route path="/members/:id" element={<MemberPage  />} />
         <Route path="channels" element={<ChannelStatsPage  />} />
@@ -25,11 +25,11 @@ function App() {
 }
 
 
-function PageLayout(props) {
+function PageLayout() {
   return (
     <div className="page-root">
       <Sidebar />
-      <Outlet {...props}/>
+      <Outlet />
     </div>
   );
 }

@@ -61,7 +61,6 @@ def channel(channel_name="default"):
     '''
     if not exists(f"./data/channels/{channel_name}.json"):
         channel_name = "default"
-        print("oof")
 
     with open(f"./data/channels/{channel_name}.json", encoding="utf-8") as f:
         response = jsonify(json.load(f))
@@ -77,14 +76,12 @@ def channel_messagecount(channel_name="default"):
         response: contains object with all the json data for that channel
     '''
     if not exists(f"./data/channels/{channel_name}.json"):
-        print("not found")
         channel_name = "default"
 
     with open(f"./data/channels/{channel_name}.json", encoding="utf-8") as f:
         response = json.load(f)
         num_messages = 0
         if channel_name!="default":
-            print(response.keys())
             num_messages = len(response["messages"])
             response = {"channel":channel_name, "num_messages":num_messages}
         response = jsonify(response)

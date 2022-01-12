@@ -10,6 +10,21 @@
   animation: glow 2s ease-in-out infinite alternate;
 }
 
+.slide-in-bottom{
+    animation: slide-in-bottom-frames 0.3s ease-out;
+}
+
+@keyframes slide-in-bottom-frames{
+    from {
+        opacity:0%;
+        filter:blur(10px);
+        transform: translateX(-100px)
+    }
+    to {
+        transform: translateX(0px)
+    }
+
+}
 @keyframes glow {
   from {
     text-shadow: none;

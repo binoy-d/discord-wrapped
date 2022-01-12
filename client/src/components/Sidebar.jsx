@@ -20,18 +20,25 @@ const ClosedSidebar = ({ handleClosedButtonClick }) =>
 
 const OpenSidebar = ({ handleOpenedButtonClick, isOpen, members, channels }) =>
     <div className={"d-sidebar " + (isOpen ? "open-sidebar" : "closed-sidebar")}>
-        <div className="d-sidebar-banner">
+        
             <Link className="d-sidebar-link" to="/">
+                <div className="d-sidebar-banner">
                 banner?
+                </div>
             </Link>
 
             <button className="opened-sidebar-btn" onClick={handleOpenedButtonClick}>
                 <AiOutlineClose />
             </button>
-        </div>
-        <Link className="d-sidebar-link" to="/home">
+        
+        <Link className="d-sidebar-link" to="/">
             <div className="d-sidebar-item d-sidebar-headingitem">
                 Home
+            </div>
+        </Link>
+        <Link className="d-sidebar-link" to="/overview">
+            <div className="d-sidebar-item d-sidebar-headingitem">
+                Overview
             </div>
         </Link>
         <Link className="d-sidebar-link" to="/channels">

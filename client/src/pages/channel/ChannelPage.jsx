@@ -7,6 +7,7 @@ import FadeIn from 'react-fade-in/lib/FadeIn';
 function ChannelPage() {
   let params = useParams();
   const [messageCount, setMessageCount] = useState(0)
+  
   useEffect(() => {
     axios.get(`http://localhost:5000/channel/${params.id}/messagecount`)
       .then((response) => {
@@ -21,12 +22,13 @@ function ChannelPage() {
       <h1 className="d-title text-center mt-5">
         #{params.id}
       </h1>
-      <FadeIn>
+      <div className={messageCount>0?"slide-in-bottom":""}>
+
         <h2 className='channel-tagline'> <strong>Holy smokes!</strong> You sent<br />
         <span className="message-count"><span className='glow'>{messageCount}</span> messages</span><br />
         in #{params.id} this year!</h2>
-      </FadeIn>
       
+        </div>
     </div>
   );
 }
