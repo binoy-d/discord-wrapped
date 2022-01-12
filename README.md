@@ -28,7 +28,7 @@ For the server, open another terminal and run these
 ## Contributors
 - Daniel Binoy
 - Atul Nair 
-- <add your names here to prove you know basic git>
+- add your names here to prove you know basic git
 
 
 
