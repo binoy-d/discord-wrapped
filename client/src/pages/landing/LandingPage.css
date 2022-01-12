@@ -23,13 +23,12 @@
     margin:0.5em;
     transition: all 0.2s ease-in-out;
     position: absolute;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(60px);
     animation: float ease-in-out infinite;
-    transform: scale(1.1);
 }
 
 .d-message-bubble:hover{
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.473) 0%, rgba(184, 159, 255, 0.1786) 100%);
+    filter: brightness(1.1)!important;
     cursor: pointer;
 }
 
@@ -67,7 +66,7 @@
     position: absolute;
     top:2em;
     left:2em;
-    color: rgba(175, 175, 250, 0.9);
+    color: white;
     border-radius:50%;
 }
 
