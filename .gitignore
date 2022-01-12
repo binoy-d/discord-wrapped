@@ -1,4 +1,7 @@
 client/node_modules
+client/node_modules/*
+./client/mode_modules
+./client/mode_modules/
 environment.yml
 package.json
 package-lock.json
