@@ -1,0 +1,28 @@
+.message-count {
+  font-weight: bolder;
+  color: var(--discord-blue-accent);
+  font-size: 3em;
+}
+
+.glow {
+  -webkit-animation: glow 2s ease-in-out infinite alternate;
+  -moz-animation: glow 2s ease-in-out infinite alternate;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: none;
+  }
+  to {
+    text-shadow: 0 0 2px #fff, 0 0 18px var(--discord-blue-glow);
+  }
+}
+
+
+.channel-tagline {
+  margin-left: 50%;
+  margin-top: 10%;
+  transform: translateX(-50%);
+  font-size: xx-large;
+}
