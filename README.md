@@ -33,8 +33,4 @@ For the server, open another terminal and run these
 
 
 ## TODO:
-- create a todo list
-- examine todo list
-- cross items off of todo list
-- ???
-- profit
+- create a shell script for macOS easy run
