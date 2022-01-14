@@ -1,4 +1,7 @@
 # bot.py
+
+# Written by Evan Nguyen
+
 import os
 
 import discord
@@ -19,7 +22,7 @@ async def on_message(message):
     if message.author == client.user:
         return
     if message.content == "w! scrape":
-        await message.channel.send("chill, i haven't even been coded yet. ")
+        await message.channel.send("you a bitch")
 
 def begin_scraping():
     pass
