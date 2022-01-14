@@ -5,3 +5,4 @@ client/node_modules/*
 environment.yml
 package.json
 package-lock.json
+bot/.env
