@@ -1,4 +1,7 @@
 # bot.py
+
+# Written by Evan Nguyen
+
 import os
 
 import discord
