@@ -80,15 +80,15 @@ async def on_guild_join(guild):
     try:
         with open(dPATH + '.prefix.pkl', "rb") as ppkl:
             prefixes = pickle.load(ppkl)
-            print("Unable to load custom prefix file. Creating new one.")
     except:
+        print("Unable to load custom prefix file. Creating new one.")
         prefixes = {}
-        
+
     prefixes[str(guild.id)] = ">>" #Default prefix = >>
     print(f"Stored new prefix for {guild.id}")
 
-    with open(dPATH + '.prefix.pkl', "wb") as ppkl:
-        pickle.dump(prefixes, ppkl)
+    ppkl = open(dPATH + '.prefix.pkl', "wb")
+    pickle.dump(prefixes, ppkl)
 
 @bot.event
 async def on_message(message):
