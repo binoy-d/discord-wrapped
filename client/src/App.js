@@ -7,11 +7,14 @@ import MemberPage from './pages/member/MemberPage';
 import ChannelStatsPage from './pages/channelstats/ChannelStatsPage';
 import MemberStatsPage from './pages/memberstats/MemberStatsPage';
 import { Routes, Route, Outlet} from "react-router-dom";
+import React, {useState} from "react";
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <Routes>
-      <Route path="/" element={<PageLayout/> } >
+      <Route path="/" element={<PageLayout sidebarOpen = {sidebarOpen} setSidebarOpen = {setSidebarOpen}/> } >
         <Route index element={<LandingPage />} />
         <Route path="/overview" element={<MainPage  />} />
         <Route path="/channels/:id" element={<ChannelPage  />} />
@@ -25,11 +28,14 @@ function App() {
 }
 
 
-function PageLayout() {
+function PageLayout({sidebarOpen, setSidebarOpen}) {
   return (
     <div className="page-root">
-      <Sidebar />
-      <Outlet />
+      <Sidebar open = {sidebarOpen} setOpen={(state)=>setSidebarOpen(state)}/>
+      <div className={sidebarOpen?"open-sidebar-outlet":"closed-sidebar-outlet"}>
+      <Outlet/>
+      </div>
+      
     </div>
   );
 }
