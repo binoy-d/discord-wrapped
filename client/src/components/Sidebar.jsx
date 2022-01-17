@@ -10,26 +10,51 @@ const data = {
     "channels": ["channel-1", "channel-2", "channel-3"]
 }
 
-const ClosedSidebar = ({ handleClosedButtonClick }) =>
-    <button className="closed-sidebar-btn" onClick={handleClosedButtonClick}>
-        <AiOutlineMenu />
-    </button>
+function Sidebar({open, setOpen}) {
+    const [members, setMembers] = useState([]);
+    const [channels, setChannels] = useState([]);
 
+    const handleClosedButtonClick = (e) => {
+        e.preventDefault();
+        setOpen(true);
+    }
 
+    const handleOpenedButtonClick = (e) => {
+        e.preventDefault();
+        setOpen(false);
+    };
 
+    useEffect(() => {
+        //get members
+        axios.get("http://localhost:5000/members")
+            .then((response) => {
+                setMembers(response.data)
+            })
+            
+        //get channels
+        axios.get("http://localhost:5000/channels")
+            .then((response) => {
+                setChannels(response.data)
+            })
 
-const OpenSidebar = ({ handleOpenedButtonClick, isOpen, members, channels }) =>
-    <div className={"d-sidebar " + (isOpen ? "open-sidebar" : "closed-sidebar")}>
-        
+    }, []);
+
+    return (
+        <div className={"d-sidebar " + (open ? "open-sidebar" : "closed-sidebar")}>
             <Link className="d-sidebar-link" to="/">
                 <div className="d-sidebar-banner">
                 banner?
                 </div>
             </Link>
-
+            {open?
             <button className="opened-sidebar-btn" onClick={handleOpenedButtonClick}>
                 <AiOutlineClose />
+            </button>:
+            <button className="closed-sidebar-btn" onClick={handleClosedButtonClick}>
+                <AiOutlineMenu />
             </button>
+        }
+            
         
         <Link className="d-sidebar-link" to="/">
             <div className="d-sidebar-item d-sidebar-headingitem">
@@ -71,50 +96,6 @@ const OpenSidebar = ({ handleOpenedButtonClick, isOpen, members, channels }) =>
         }
     </div>
 
-
-
-function Sidebar() {
-
-    const [open, setOpen] = useState(false);
-    const [members, setMembers] = useState([]);
-    const [channels, setChannels] = useState([]);
-
-    const handleClosedButtonClick = (e) => {
-        e.preventDefault();
-        setOpen(true);
-    }
-
-    const handleOpenedButtonClick = (e) => {
-        e.preventDefault();
-        setOpen(false);
-    };
-
-
-
-
-    useEffect(() => {
-        //get members
-        axios.get("http://localhost:5000/members")
-            .then((response) => {
-                setMembers(response.data)
-            })
-            
-        //get channels
-        axios.get("http://localhost:5000/channels")
-            .then((response) => {
-                setChannels(response.data)
-            })
-
-    }, []);
-
-    return (
-        open ?
-            <OpenSidebar
-                isOpen={open}
-                handleOpenedButtonClick={handleOpenedButtonClick}
-                members={members} 
-                channels={channels}/> :
-            <ClosedSidebar handleClosedButtonClick={handleClosedButtonClick} />
     );
 }
 
