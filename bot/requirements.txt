@@ -1,3 +1,4 @@
 discord
 pandas
 python-dotenv
+flask
