@@ -17,13 +17,11 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-client = discord.Client()
+bot = discord.Client()
 
-@client.event
+@bot.event
 async def on_ready():
-    """ Loads a message when bot is online
-    """    
-    print(f'{client.user} has connected to Discord!')
+    print(f'{bot.user} has connected to Discord!')
 
 
 async def scan(message):
