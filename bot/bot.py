@@ -85,19 +85,17 @@ class Wrapped(commands.Cog):
             if(len(message) > 3):
                 message = message[:3]
 
+            async def button_callback(self, button, interact):
+                await interact.response.send_message(f"{button.label}")
+
             await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
             components=[[
-                    Button(style=ButtonStyle.green, label="Yes"),
-                    Button(label="Decline")
+                    Button(label="Yes", style=ButtonStyle.green).callback = button_callback,
+                    Button(label="Decline").callback = button_callback
                 ]]
             )
 
-            interaction = await self.bot.wait_for("button_click")
-            if interaction.channel == ctx.message.channel:
-                await interaction.respond(
-                    type=InteractionType.ChannelMessageWithSource,
-                    content=f'{interaction.component.label}'
-                )
+            
         else:
             await ctx.send(embed=genEmbed('', f'{ctx.author.mention}, you did not specify a prefix.'))           
 
