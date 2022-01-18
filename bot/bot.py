@@ -81,11 +81,11 @@ class Wrapped(commands.Cog):
     @commands.command(name="prefix", description="Changes the prefix for the server. Accepts up to 3 sequential characters.")
     async def _prefixChange(ctx, message=""):
         if message:
-            message = message.replace(" ", "") #trim spaces
-            if(len(message) > 3):
-                message = message[:3]
+            msg = message.content.replace(" ", "") #trim spaces
+            if(len(msg) > 3):
+                msg = msg[:3]
 
-            await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
+            await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{msg}**?'), 
             components=[
                 Select(
                     placeholder="Select test",
