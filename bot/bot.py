@@ -21,15 +21,19 @@ from dotenv import load_dotenv
 botCommands = {}
 dPATH = "data/"
 
-try:
+def get_prefix(bot, msg):
     with open(dPATH + '.prefix.pkl', "rb") as ppkl:
         prefixes = pickle.load(ppkl)
-except:
-    print("Unable to load custom prefix file. Creating new one.")
-    prefixes = {}
 
-def get_prefix(bot, msg):
     return prefixes[str(msg.guild.id)]
+
+def genEmbed(title, description=""):
+    embed = discord.Embed(
+        colour = 1973790,
+        title = title,
+        description = description
+    )
+    return embed
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -70,11 +74,16 @@ async def scan(message):
         f"Scanning finished in {round(end - start, 2)} seconds"
         )
 
+class Wrap(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+        self.desc = "Core functions needed for this bot to operate."
 
 @bot.event
 async def on_ready():
     print(f'{bot.user} is now Online.')
 
+#Initializes custom prefixes. 
 @bot.event
 async def on_guild_join(guild):
     try:
@@ -85,7 +94,6 @@ async def on_guild_join(guild):
         prefixes = {}
 
     prefixes[str(guild.id)] = ">>" #Default prefix = >>
-    print(f"Stored new prefix for {guild.id}")
 
     ppkl = open(dPATH + '.prefix.pkl', "wb")
     pickle.dump(prefixes, ppkl)
@@ -112,6 +120,11 @@ async def on_message(message):
         if cmd == 'scan':
             await scan(message)
     '''
+    if message.mentions[0] == bot.user:
+        with open(dPATH + '.prefix.pkl', "rb") as ppkl:
+            prefixes = pickle.load(ppkl)
+        
+        await message.channel.send(embed=genEmbed('', f'The current prefix for this server is **{prefixes[str(message.guild.id)]}**'))
 
     await bot.process_commands(message)
         
