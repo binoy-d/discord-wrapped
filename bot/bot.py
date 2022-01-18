@@ -85,21 +85,16 @@ class Wrapped(commands.Cog):
             if(len(message) > 3):
                 message = message[:3]
 
-            await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
-            components=[
-                Select(
-                    placeholder="Select test",
-                    options=[
-                        SelectOption(label="✔️", value="a"),
-                        SelectOption(label="Decline", value="b")
-                    ],
-                    custom_id="pc1"
-                )]
+            b = await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
+            buttons=[
+                    Button(label="✔️", value="a"),
+                    Button(label="Decline", value="b")
+                ],
+                custom_id="pc1"
             )
 
-            interaction = await bot.wait_for(
-                "selected", check=lambda i: i.custom_id == "pc1"
-            )
+            interaction = await bot.wait_for_button_click(b)
+                
             await interaction.send(embed=f"{interaction.values[0]} was selected")
         else:
             await ctx.send(embed=genEmbed('', f'{ctx.author.mention}, you did not specify a prefix.'))           
