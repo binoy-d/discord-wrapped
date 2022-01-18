@@ -89,8 +89,7 @@ class Wrapped(commands.Cog):
             components=[
                     Button(style=ButtonStyle.green, label="✔️"),
                     Button(label="Decline")
-                ],
-                custom_id="pc1"
+                ]
             )
 
             interaction = await bot.wait_for_button_click(b)
