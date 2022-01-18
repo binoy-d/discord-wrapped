@@ -6,6 +6,8 @@ Author: Evan Nguyen
 import discord
 from discord.ext import commands
 
+import pickle
+
 #-----------------------------------------------------------------
 def embed(title, description=""):
     embed = discord.Embed(

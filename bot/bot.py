@@ -16,14 +16,17 @@ import discord
 from discord.ext import commands
 from discord.ui import Button, View
 #LOAD------------------------------------------------------------
-botCommands = {}
+botCommands = {} #Unused for now. Will be implemented in a help function later.
 dPATH = "data/"
 
 def get_prefix(bot, msg):
     with open(dPATH + '.prefix.pkl', "rb") as ppkl:
         prefixes = pickle.load(ppkl)
 
-    return prefixes[str(msg.guild.id)]
+    if not prefixes[str(msg.guild.id)]:
+        return ">>"
+    else:
+        return prefixes[str(msg.guild.id)]
 
 def genEmbed(title, description=""):
     embed = discord.Embed(
@@ -128,7 +131,7 @@ async def on_ready():
     print(f'{bot.user} is now Online.')
 
 #Initializes custom prefixes. 
-@bot.event
+'''@bot.event
 async def on_guild_join(guild):
     try:
         with open(dPATH + '.prefix.pkl', "rb") as ppkl:
@@ -141,6 +144,7 @@ async def on_guild_join(guild):
 
     ppkl = open(dPATH + '.prefix.pkl', "wb")
     pickle.dump(prefixes, ppkl)
+'''
 
 @bot.event
 async def on_message(message):
