@@ -80,14 +80,14 @@ class Wrapped(commands.Cog):
 
     @commands.command(name="prefix", description="Changes the prefix for the server. Accepts up to 3 sequential characters.")
     async def _prefixChange(self, ctx, *, message: str):
+        async def button_callback(self, button, interact):
+            print("called")
+            await interact.response.send_message(f"{button.label}")
+        
         if message:
             message = message.replace(" ", "") #trim spaces
             if(len(message) > 3):
                 message = message[:3]
-
-            async def button_callback(self, button, interact):
-                print("called")
-                await interact.response.send_message(f"{button.label}")
 
             b1 = Button(label="Yes", style=ButtonStyle.green)
             b2 = Button(label="Decline")
