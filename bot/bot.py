@@ -82,16 +82,16 @@ class Wrapped(commands.Cog):
     async def _prefixChange(self, ctx, *, message: str):
         
         async def button_callback(interact):
-            print(interact.data)
-            await interact.response.send_message(f"aa")
+            print(interact.custom_id)
+            await interact.response.send_message(f"{interact.custom_id}")
         
         if message:
             message = message.replace(" ", "") #trim spaces
             if(len(message) > 3):
                 message = message[:3]
 
-            b1 = Button(label="Yes", style=discord.ButtonStyle.green)
-            b2 = Button(label="Decline")
+            b1 = Button(label="Yes", style=discord.ButtonStyle.green, custom_id="1")
+            b2 = Button(label="Decline", custom_id="2")
             b1.callback = button_callback
             b2.callback = button_callback
 
