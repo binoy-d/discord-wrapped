@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 
 import discord
 from discord.ext import commands
-from discord.ui import Button
+from discord.ui import Button, View
 #LOAD------------------------------------------------------------
 botCommands = {}
 dPATH = "data/"
