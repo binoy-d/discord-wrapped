@@ -82,7 +82,7 @@ class Wrapped(commands.Cog):
     async def _prefixChange(self, ctx, *, message: str):
         
         async def button_callback(interact):
-            li = interact.id
+            li = interact.component.label
             print(li)
             await interact.response.edit_message(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), view=None)
         
@@ -101,6 +101,12 @@ class Wrapped(commands.Cog):
             view.add_item(b2)
 
             await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), view=view)
+
+            #resp = await self.bot.wait_for("button_click")
+            #if resp.channel == ctx.channel:
+            #    await resp.respond(
+            #        type=InteractionType.ChannelMessageWithSource
+            #    )
         else:
             await ctx.send(embed=genEmbed('', f'{ctx.author.mention}, you did not specify a prefix.'))           
 
