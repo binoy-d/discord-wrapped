@@ -94,14 +94,11 @@ class Wrapped(commands.Cog):
             b1.callback = button_callback
             b2.callback = button_callback
 
-            await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
-            components=[[
-                    b1,
-                    b2
-                ]]
-            )
+            view=View()
+            view.add_item(b1)
+            view.add_item(b2)
 
-            
+            await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), view=view)
         else:
             await ctx.send(embed=genEmbed('', f'{ctx.author.mention}, you did not specify a prefix.'))           
 
