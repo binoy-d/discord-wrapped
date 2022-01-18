@@ -96,7 +96,7 @@ class Wrapped(commands.Cog):
                         print("Unable to load custom prefix file. Creating new one.")
                         prefixes = {}
 
-                    prefixes[str(guild.id)] = message #Default prefix = >>
+                    prefixes[str(ctx.guild.id)] = message #Default prefix = >>
 
                     ppkl = open(dPATH + '.prefix.pkl', "wb")
                     pickle.dump(prefixes, ppkl)
