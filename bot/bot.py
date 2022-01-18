@@ -90,7 +90,7 @@ class Wrapped(commands.Cog):
                 Select(
                     placeholder="Select test",
                     options=[
-                        SelectOption(label="✔️", style=discord.ButtonStyle.green, value="a"),
+                        SelectOption(label="✔️", value="a"),
                         SelectOption(label="Decline", value="b")
                     ],
                     custom_id="pc1"
