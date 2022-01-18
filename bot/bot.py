@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 
 import discord
 from discord.ext import commands
-from discord_components import Button, Select, SelectOption, ComponentsBot
+from discord_components import Button, ButtonStyle, Select, SelectOption, ComponentsBot
 #LOAD------------------------------------------------------------
 botCommands = {}
 dPATH = "data/"
@@ -87,8 +87,8 @@ class Wrapped(commands.Cog):
 
             b = await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
             buttons=[
-                    Button(label="✔️", value="a"),
-                    Button(label="Decline", value="b")
+                    Button(style=ButtonStyle.green, label="✔️"),
+                    Button(label="Decline")
                 ],
                 custom_id="pc1"
             )
