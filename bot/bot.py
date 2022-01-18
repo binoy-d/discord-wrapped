@@ -83,7 +83,7 @@ class Wrapped(commands.Cog):
         
         async def button_callback(interact):
             await interact.response.edit_message(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'))
-            await interact.response.send_message(f"{interact.data["custom_id"]}")
+            await interact.response.send_message(f"{interact.data}")
         
         if message:
             message = message.replace(" ", "") #trim spaces
