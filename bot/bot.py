@@ -86,7 +86,7 @@ class Wrapped(commands.Cog):
                 message = message[:3]
 
             b = await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
-            buttons=[
+            components=[
                     Button(style=ButtonStyle.green, label="✔️"),
                     Button(label="Decline")
                 ],
@@ -94,8 +94,10 @@ class Wrapped(commands.Cog):
             )
 
             interaction = await bot.wait_for_button_click(b)
-                
-            await interaction.send(embed=f"{interaction.values[0]} was selected")
+            await interaction.respond(
+                type=InteractionType.ChannelMessageWithSource,
+                content=genEmbed('', f'{interaction.component.label}')
+            )
         else:
             await ctx.send(embed=genEmbed('', f'{ctx.author.mention}, you did not specify a prefix.'))           
 
