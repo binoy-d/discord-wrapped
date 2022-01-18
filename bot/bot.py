@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 
 import discord
 from discord.ext import commands
-from discord.ui import Button, ButtonStyle
+from discord.ui import Button
 #LOAD------------------------------------------------------------
 botCommands = {}
 dPATH = "data/"
@@ -89,7 +89,7 @@ class Wrapped(commands.Cog):
             if(len(message) > 3):
                 message = message[:3]
 
-            b1 = Button(label="Yes", style=ButtonStyle.green)
+            b1 = Button(label="Yes", style=discord.ButtonStyle.green)
             b2 = Button(label="Decline")
             b1.callback = button_callback
             b2.callback = button_callback
