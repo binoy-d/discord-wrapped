@@ -37,7 +37,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix = get_prefix)
-DiscordComponents(bot) #Enables use of third party components library. Will be removed when discord.py 2.0 releases.
+ComponentsBot(bot) #Enables use of third party components library. Will be removed when discord.py 2.0 releases.
 #------------------------------------------------------------------
 
 async def scan(message):
