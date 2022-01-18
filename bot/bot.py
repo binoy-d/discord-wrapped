@@ -86,13 +86,14 @@ class Wrapped(commands.Cog):
                 message = message[:3]
 
             async def button_callback(self, button, interact):
+                print("called")
                 await interact.response.send_message(f"{button.label}")
 
             b1 = Button(label="Yes", style=ButtonStyle.green)
             b2 = Button(label="Decline")
             b1.callback = button_callback
             b2.callback = button_callback
-            
+
             await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
             components=[[
                     b1,
