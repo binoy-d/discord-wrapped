@@ -81,19 +81,32 @@ class Wrapped(commands.Cog):
     @commands.command(name="prefix", description="Changes the prefix for the server. Accepts up to 3 sequential characters.")
     async def _prefixChange(self, ctx, *, message: str):
         
-        async def button_callback(interact):
-            print(interact.data)
-            li = interact.data['custom_id']
-            print(li)
-            await interact.response.edit_message(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), view=None)
-        
         if message:
             message = message.replace(" ", "") #trim spaces
             if(len(message) > 3):
                 message = message[:3]
 
-            b1 = Button(label="Yes", style=discord.ButtonStyle.green, custom_id="1")
-            b2 = Button(label="Decline", custom_id="2")
+            async def button_callback(interact):
+                ci = interact.data['custom_id']
+                if(ci == "0"):
+                    try:
+                        with open(dPATH + '.prefix.pkl', "rb") as ppkl:
+                            prefixes = pickle.load(ppkl)
+                    except:
+                        print("Unable to load custom prefix file. Creating new one.")
+                        prefixes = {}
+
+                    prefixes[str(guild.id)] = message #Default prefix = >>
+
+                    ppkl = open(dPATH + '.prefix.pkl', "wb")
+                    pickle.dump(prefixes, ppkl)
+
+                    await interact.response.edit_message(embed=genEmbed('', f'The prefix for this server is now **{message}**.'), view=None)
+                else:
+                    await interact.response.edit_message(embed=genEmbed('', f'The prefix for this server was not changed.'), view=None)
+
+            b1 = Button(label="Yes", style=discord.ButtonStyle.green, custom_id="0")
+            b2 = Button(label="Decline", custom_id="1")
             b1.callback = button_callback
             b2.callback = button_callback
 
