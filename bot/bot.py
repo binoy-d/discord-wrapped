@@ -120,13 +120,15 @@ async def on_message(message):
         if cmd == 'scan':
             await scan(message)
     '''
-    if message.mentions[0] == bot.user:
-        with open(dPATH + '.prefix.pkl', "rb") as ppkl:
-            prefixes = pickle.load(ppkl)
-        
-        await message.channel.send(embed=genEmbed('', f'The current prefix for this server is **{prefixes[str(message.guild.id)]}**'))
+    try:
+        if message.mentions[0] == bot.user:
+            with open(dPATH + '.prefix.pkl', "rb") as ppkl:
+                prefixes = pickle.load(ppkl)
+            
+            await message.channel.send(embed=genEmbed('', f'The current prefix for this server is **{prefixes[str(message.guild.id)]}**'))
 
-    await bot.process_commands(message)
+        await bot.process_commands(message)
+    except:
         
 from scrape import *
 bot.add_cog(Scrape(bot))
