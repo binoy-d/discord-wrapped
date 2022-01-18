@@ -28,6 +28,7 @@ For the server, open another terminal and run these
 ## Contributors
 - Daniel Binoy
 - Atul Nair 
+- Evan Nguyen
 - add your names here to prove you know basic git
 
 
