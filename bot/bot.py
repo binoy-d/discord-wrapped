@@ -129,6 +129,8 @@ async def on_message(message):
 
         await bot.process_commands(message)
     except:
+        pass
+
         
 from scrape import *
 bot.add_cog(Scrape(bot))
