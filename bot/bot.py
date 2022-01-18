@@ -82,8 +82,8 @@ class Wrapped(commands.Cog):
     async def _prefixChange(self, ctx, *, message: str):
         
         async def button_callback(interact):
-            print("called")
-            await interact.response.send_message(f"{interact.label}")
+            print(interact.data)
+            await interact.response.send_message(f"aa")
         
         if message:
             message = message.replace(" ", "") #trim spaces
