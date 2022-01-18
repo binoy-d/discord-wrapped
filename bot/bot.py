@@ -73,7 +73,7 @@ async def scan(message):
         f"Scanning finished in {round(end - start, 2)} seconds"
         )
 
-class Wrap(commands.Cog):
+class Wrapped(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.desc = "Core functions needed for this bot to operate."
@@ -155,8 +155,10 @@ async def on_message(message):
         pass
 
     await bot.process_commands(message)
-        
+
+#Import scrape cog
 from scrape import *
 bot.add_cog(Scrape(bot))
 
+bot.add_cog(Wrapped(bot)) #Main cog
 bot.run(TOKEN)
