@@ -151,11 +151,10 @@ async def on_message(message):
                 prefixes = pickle.load(ppkl)
             
             await message.channel.send(embed=genEmbed('', f'The current prefix for this server is **{prefixes[str(message.guild.id)]}**'))
-
-        await bot.process_commands(message)
     except:
         pass
 
+    await bot.process_commands(message)
         
 from scrape import *
 bot.add_cog(Scrape(bot))
