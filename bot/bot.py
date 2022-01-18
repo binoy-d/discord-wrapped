@@ -23,10 +23,10 @@ def get_prefix(bot, msg):
     with open(dPATH + '.prefix.pkl', "rb") as ppkl:
         prefixes = pickle.load(ppkl)
 
-    if not prefixes[str(msg.guild.id)]:
-        return ">>"
-    else:
+    try:
         return prefixes[str(msg.guild.id)]
+    except:
+        return ">>"
 
 def genEmbed(title, description=""):
     embed = discord.Embed(
