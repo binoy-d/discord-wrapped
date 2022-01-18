@@ -1,22 +1,20 @@
 
 """
-Discord Bot for data collection
+Wrapped - A Discord Bot for message data collection
+Author: Evan Nguyen 
 
-@AUTHORS:
-    Evan Nguyen
-    Atul Nair
+Contributors: Atul Nair
 """
 
 import os
 import time
 import pickle
-
-import discord
-from discord.ext import commands
-
 import pandas as pd
 from dotenv import load_dotenv
 
+import discord
+from discord.ext import commands
+from discord_components import Button, Select, SelectOption, ComponentsBot
 #LOAD------------------------------------------------------------
 botCommands = {}
 dPATH = "data/"
@@ -39,6 +37,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix = get_prefix)
+DiscordComponents(bot) #Enables use of third party components library. Will be removed when discord.py 2.0 releases.
 #------------------------------------------------------------------
 
 async def scan(message):
@@ -78,6 +77,32 @@ class Wrap(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.desc = "Core functions needed for this bot to operate."
+
+    @commands.command(name="prefix", description="Changes the prefix for the server. Accepts up to 3 sequential characters.")
+    async def _prefixChange(ctx, message=""):
+        if message:
+            message = message.replace(" ", "") #trim spaces
+            if(len(message) > 3):
+                message = message[:3]
+
+            await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
+            components=[
+                Select(
+                    placeholder="Select test",
+                    options=[
+                        SelectOption(label="✔️", style=discord.ButtonStyle.green, value="a")
+                        SelectOption(label="Decline", value="b")
+                    ],
+                    custom_id="pc1"
+                )]
+            )
+
+            interaction = await bot.wait_for(
+                "selected", check=lambda i: i.custom_id == "pc1"
+            )
+            await interaction.send(embed=f"{interaction.values[0]} was selected")
+        else:
+            await ctx.send(embed=genEmbed('', f'{ctx.author.mention}, you did not specify a prefix.'))           
 
 @bot.event
 async def on_ready():
