@@ -85,14 +85,14 @@ class Wrapped(commands.Cog):
             if(len(message) > 3):
                 message = message[:3]
 
-            b = await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
-            components=[
-                    Button(style=ButtonStyle.green, label="✔️"),
+            await ctx.send(embed=genEmbed('', f'Would you like to change the server prefix to **{message}**?'), 
+            components=[[
+                    Button(style=ButtonStyle.green, label="Yes"),
                     Button(label="Decline")
-                ]
+                ]]
             )
 
-            interaction = await bot.wait_for_button_click(b)
+            interaction = await bot.wait_for("button_click")
             await interaction.respond(
                 type=InteractionType.ChannelMessageWithSource,
                 content=genEmbed('', f'{interaction.component.label}')
