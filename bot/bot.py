@@ -82,7 +82,9 @@ class Wrapped(commands.Cog):
     async def _prefixChange(self, ctx, *, message: str):
         
         async def button_callback(interact):
-            await interact.response.send_message(f"{interact.data}")
+            li = interact.data
+            await interact.response.edit_message(f'Would you like to change the server prefix to **{message}**?'), view=None)
+            await interact.response.send_message(f"{li[0]}")
         
         if message:
             message = message.replace(" ", "") #trim spaces
