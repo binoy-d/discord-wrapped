@@ -92,11 +92,12 @@ class Wrapped(commands.Cog):
                 ]]
             )
 
-            interaction = await bot.wait_for("button_click")
-            await interaction.respond(
-                type=InteractionType.ChannelMessageWithSource,
-                content=genEmbed('', f'{interaction.component.label}')
-            )
+            interaction = await self.bot.wait_for("button_click")
+            if interaction.channel == ctx.message.channel:
+                await interaction.respond(
+                    type=InteractionType.ChannelMessageWithSource,
+                    content=genEmbed('', f'{interaction.component.label}')
+                )
         else:
             await ctx.send(embed=genEmbed('', f'{ctx.author.mention}, you did not specify a prefix.'))           
 
