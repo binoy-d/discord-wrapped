@@ -4,12 +4,6 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import './Sidebar.css';
 
-
-const data = {
-    "members": ["user1", "user2", "user3"],
-    "channels": ["channel-1", "channel-2", "channel-3"]
-}
-
 function Sidebar({open, setOpen}) {
     const [members, setMembers] = useState([]);
     const [channels, setChannels] = useState([]);
@@ -28,13 +22,16 @@ function Sidebar({open, setOpen}) {
         //get members
         axios.get("http://localhost:5000/members")
             .then((response) => {
-                setMembers(response.data)
+                setMembers(response.data.names)
+                
             })
             
         //get channels
         axios.get("http://localhost:5000/channels")
             .then((response) => {
-                setChannels(response.data)
+                console.log("yes")
+                setChannels(response.data.names)
+                console.log(response.data.names)
             })
 
     }, []);
@@ -72,7 +69,7 @@ function Sidebar({open, setOpen}) {
             </div>
         </Link>
         {
-            channels.names.map((name, i) =>
+            channels.map((name, i) =>
                 <Link className="d-sidebar-link" to={`/channels/${name}`} key={"sidebar-channel-" + i}>
                     <div className="d-sidebar-item d-sidebar-subitem">
                         #{name}
@@ -86,7 +83,7 @@ function Sidebar({open, setOpen}) {
             </div>
         </Link>
         {
-            members.names.map((name, i) =>
+            members.map((name, i) =>
                 <Link className="d-sidebar-link" to={`/members/${name}`} key={"sidebar-member-" + i}>
                     <div className="d-sidebar-item d-sidebar-subitem">
                         @{name}
@@ -96,7 +93,7 @@ function Sidebar({open, setOpen}) {
         }
     </div>
 
-    );
+);
 }
 
 export default Sidebar;

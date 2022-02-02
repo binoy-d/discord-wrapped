@@ -3,12 +3,12 @@
   --discord-blue-accent: #7289DA;
   --discord-full-white: #ffffff;
   --discord-dark-grey: #2C2F33;
-  --discord-darker-grey: #23272A;
+  --discord-darker-grey: #1b1b25;
   --discord-blue-glow: #7b93ebaf;
 }
 
 body,html{
-  background-color: var(--discord-darker-grey);
+  background-image: linear-gradient(black, white);
   color: var(--discord-full-white);
   
   overflow-x: hidden;

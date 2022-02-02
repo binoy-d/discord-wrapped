@@ -2,6 +2,8 @@ import json
 from os.path import exists
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
+from pymongo import MongoClient
+from pprint import pprint
 
 app = Flask(__name__)
 CORS(app)
@@ -91,4 +93,10 @@ def channel_messagecount(channel_name="default"):
 
 
 if __name__ == "__main__":
+    client = MongoClient()
+    
+    db=client.admin
+    print(db)
+    serverStatusResult=db.command("serverStatus")
+    pprint(serverStatusResult["metrics"]["query"])
     app.run(debug=True)
