@@ -46,18 +46,18 @@ function HeroSection() {
                 </div>
             </div>
             <div className="braincells-container">
-                <Marquee speed={100}>
+                <Marquee speed={50}>
                     <span className="braincells-box">
-                        <p>📣 Scroll to lose brain cells 📣</p>
+                        <p>Scroll to lose brain cells 📣</p>
                     </span>
                     <span className="braincells-box">
-                        <p>📣 Scroll to lose brain cells 📣</p>
+                        <p>Scroll to lose brain cells 💎</p>
                     </span>
                     <span className="braincells-box">
-                        <p>📣 Scroll to lose brain cells 📣</p>
+                        <p>Scroll to lose brain cells 📣</p>
                     </span>
                     <span className="braincells-box">
-                        <p>📣 Scroll to lose brain cells 📣</p>
+                        <p>Scroll to lose brain cells 💎</p>
                     </span>
                 </Marquee>
 

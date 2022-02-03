@@ -67,17 +67,18 @@
 .headline {
   margin-top: 40%;
   margin-left: 0.25em;
-  transform: translateY(-80%);
+  transform: translateY(-65%);
 
+  font-family: Lexend;
+  font-weight: 500;
   color: #000000;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 5em;
-  line-height: 0.8em;
+  line-height: 0.9em;
 }
 
 .tagline-box {
-  height: 20%;
-  padding: 2em 3em 10em 2em;
+  padding: 2em 3em 2em 2em;
 
   transform: translateY(-65%);
   position: relative;
@@ -92,12 +93,10 @@
 
 .tagline {
   color: #787878;
+  
+  font-family: Lexend;
   font-size: larger;
-}
-
-.align-bottom {
-  position: absolute;
-  bottom: 2.5em;
+  margin-bottom: 2em;
 }
 
 .add-to-discord-button {
@@ -153,7 +152,6 @@
   animation: scroll 10s linear infinite;
 }
 
-
 /* Make it move */
 @keyframes scroll {
   0% {
@@ -165,9 +163,9 @@
 }
 
 .braincells-box {
-  float:left;
+  float: left;
   padding: 0.75em 1.5em 0.5em 1.5em;
-  margin: 0em 1em 0em 1em;
+  margin: 0em .75em 0em .75em;
   background: #f3f3f3;
   box-shadow: inset -5px 6px 45px rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(39px);
@@ -184,4 +182,27 @@
   /* or 58px */
 
   color: #000000;
+}
+
+.headline-2 {
+  margin-top: 70%;
+  font-size: 3.5em;
+  font-family: Lexend;
+  transform: translateY(-150%);
+}
+
+.Mission {
+  background: #f8f8f8;
+}
+
+.tagline-box-2 {
+  background: #ffffff;
+  box-shadow: inset -5px 6px 45px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(39px);
+  border-radius: 20px;
+  height: fit-content;
+}
+
+.tagline-2 {
+  margin-bottom: 0;
 }
