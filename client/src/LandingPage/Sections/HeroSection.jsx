@@ -50,16 +50,16 @@ function HeroSection() {
             <div className="braincells-container">
                 <Marquee speed={50}>
                     <span className="braincells-box">
-                        <p>Scroll to lose brain cells <img className="braincell-emoji" src={Gem_Emoji} /></p>
+                        <p>Scroll to lose brain cells <img alt="gem emoji" className="braincell-emoji" src={Gem_Emoji} /></p>
                     </span>
                     <span className="braincells-box">
-                        <p>Scroll to lose brain cells <img className="braincell-emoji" src={Loudspeaker_Emoji} /></p>
+                        <p>Scroll to lose brain cells <img alt="loudspeaker emoji" className="braincell-emoji" src={Loudspeaker_Emoji} /></p>
                     </span>
                     <span className="braincells-box">
-                        <p>Scroll to lose brain cells <img className="braincell-emoji" src={Gem_Emoji} /></p>
+                        <p>Scroll to lose brain cells <img alt="gem emoji" className="braincell-emoji" src={Gem_Emoji} /></p>
                     </span>
                     <span className="braincells-box">
-                        <p>Scroll to lose brain cells <img className="braincell-emoji" src={Loudspeaker_Emoji} /></p>
+                        <p>Scroll to lose brain cells <img alt="loudspeaker emoji" className="braincell-emoji" src={Loudspeaker_Emoji} /></p>
                     </span>
                 </Marquee>
 
