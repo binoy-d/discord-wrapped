@@ -1,5 +1,5 @@
 import Landing_Graph1 from "./Images/Landing_Graph1.png"
-import { Slide , Fade} from "react-awesome-reveal";
+import { Slide } from "react-awesome-reveal";
 
 function MissionSection() {
     return (
