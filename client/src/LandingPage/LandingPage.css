@@ -8,9 +8,11 @@
 	line-height: 34px;
 	align-items: center;
 	text-align: center;
-	color: #6676ff;
 	text-decoration: none;
-	text-shadow: 0px 0px 40px rgba(96, 111, 241, 1);
+  
+color: #6676FF;
+
+text-shadow: 0px 2px 34px rgba(96, 111, 241, 0.8);
 	transition: all 0.1s ease-in;
 	margin: 0em 1em 0em 1em;
 }
@@ -83,9 +85,11 @@
 
 .tagline-box {
 	padding: 2em 3em 2em 2em;
-	transform: translateY(-65%);
+	transform: translateY(-56%);
 	position: relative;
-	width: 80%;
+  max-width:650px;
+  padding-top:3em;
+  padding-bottom: 3em;;
 	background: #e9e9e9;
 	box-shadow: inset -5px 6px 45px rgba(255, 255, 255, 0.2);
 	backdrop-filter: blur(39px);
@@ -130,6 +134,7 @@
 .hero-boxgrid {
 	margin-top: 45%;
 	transform: translateY(-50%);
+  min-width:450px;
 	margin-left: 1em;
 }
 
@@ -179,7 +184,8 @@
 
 .braincells-box {
 	float: left;
-	padding: 0.75em 1.5em 0.5em 1.5em;
+	padding: 0em 0em 0em 0.5em;
+  height:80%;
 	margin: 0em .2em 0em .2em;
 	background: #f3f3f3;
 	box-shadow: inset -5px 6px 45px rgba(255, 255, 255, 0.2);
@@ -189,19 +195,11 @@
 	font-family: Lexend;
 	font-style: normal;
 	font-weight: normal;
-	font-size: xx-large;
-	height: 100%;
-	line-height: 100%;
+	font-size: 40px;
 	/* or 58px */
 	color: #000000;
 }
 
-.headline-2 {
-	margin-top: 70%;
-	font-size: 3.5em;
-	font-family: Lexend;
-	transform: translateY(-150%);
-}
 
 .headline-3 {
 	margin-top: 70%;
@@ -212,24 +210,36 @@
 
 .Mission {
 	background: #f8f8f8;
-	padding-bottom: 4em;
+	padding-bottom: 15%;
+  padding-top:10%;
 }
+.headline-2 {
+	margin-top: 20%;
+	font-size: 3.5em;
+	font-family: Lexend;
+	transform: translateY(0%);
+  margin-left: 1em;
+}
+
 
 .tagline-box-2 {
 	background: #ffffff;
 	box-shadow: inset -5px 6px 45px rgba(255, 255, 255, 0.2);
 	backdrop-filter: blur(39px);
+  transform:translateY(-7%);
 	border-radius: 20px;
-	height: fit-content;
+  font-size: 17px;
+  margin-left:3em;
 }
 
 .tagline-2 {
-	margin-bottom: 0;
+	margin-bottom: 0em;
+  
 }
 
 .mission-graph {
 	margin-top: 20%;
-	;
+	min-width:350px;
 	opacity: 1;
 	transform: translateY(5%) scale(1.0);
 }
@@ -267,7 +277,9 @@
 }
 
 #Landing_Graph_Img_1 {
-	animation-iteration-count: 1;
+  padding-right: 2em;
+  text-align:left;
+  
 }
 
 .LaughWithFriendsSection {
@@ -277,4 +289,11 @@
 .headline-4 {
 	transform: translateY(-90%);
 }
+
+.braincell-emoji{
+  max-width:2.1em;
+  align-self: center;
+  transform:translateY(-5%);
+}
+
 

@@ -1,5 +1,7 @@
 import AddToDiscordButton from "./AddToDiscordButton";
 import Marquee from "react-fast-marquee";
+import Gem_Emoji from "./Images/Gem_Emoji.png"
+import Loudspeaker_Emoji from "./Images/Loudspeaker_Emoji.png"
 
 function HeroSection() {
     return (
@@ -48,16 +50,16 @@ function HeroSection() {
             <div className="braincells-container">
                 <Marquee speed={50}>
                     <span className="braincells-box">
-                        <p>Scroll to lose brain cells 📣</p>
+                        <p>Scroll to lose brain cells <img className="braincell-emoji" src={Gem_Emoji} /></p>
                     </span>
                     <span className="braincells-box">
-                        <p>Scroll to lose brain cells 💎</p>
+                        <p>Scroll to lose brain cells <img className="braincell-emoji" src={Loudspeaker_Emoji} /></p>
                     </span>
                     <span className="braincells-box">
-                        <p>Scroll to lose brain cells 📣</p>
+                        <p>Scroll to lose brain cells <img className="braincell-emoji" src={Gem_Emoji} /></p>
                     </span>
                     <span className="braincells-box">
-                        <p>Scroll to lose brain cells 💎</p>
+                        <p>Scroll to lose brain cells <img className="braincell-emoji" src={Loudspeaker_Emoji} /></p>
                     </span>
                 </Marquee>
 
