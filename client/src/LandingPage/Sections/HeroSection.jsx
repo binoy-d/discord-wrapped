@@ -14,7 +14,7 @@ function HeroSection() {
                         </div>
                         <div className="tagline-box">
                             <p className="tagline">
-                                The greatest discord statistics plug-in, tailormade to get you bitches.
+                                See discord stats and make your server go <br /> (☞°ヮ°)☞ ☜(°ヮ°☜)
                             </p>
                             <div className="align-bottom">
                                 <AddToDiscordButton />
@@ -26,7 +26,7 @@ function HeroSection() {
 
                             <div className="row ">
                                 <div className="col col-6">
-                                    <div className="hero-box" />
+                                    <div className="hero-box box-rotate-1" />
                                 </div>
                                 <div className="col col-6">
                                     <div className="hero-box" />
