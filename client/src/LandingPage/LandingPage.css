@@ -107,18 +107,17 @@
 	font-style: normal;
 	font-weight: bold;
 	font-size: 20px;
-	line-height: 34px;
 	align-items: center;
 	text-align: center;
 	color: #ffffff;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset -5px 6px 45px rgba(255, 255, 255, 0.2);
 	backdrop-filter: blur(39px);
 	text-decoration: none;
-	padding: 0.6em 1.9em 0.6em 1.9em;
+	padding: 0.7em 1.9em 0.7em 1.9em;
 	/* Note: backdrop-filter has minimal browser support */
 	border-radius: 20px;
-	margin-right: 4em;
-	margin-left: 1em;
+	margin-right: 0.25em;
+	margin-left: 0.25em;
 	transition: all 0.1s ease-in;
 }
 
