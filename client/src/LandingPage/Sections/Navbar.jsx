@@ -1,3 +1,5 @@
+import React from 'react'
+
 function Navbar() {
     return (
         <div className="navbar navbar-expand-lg dw-navbar">

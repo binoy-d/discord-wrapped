@@ -1,3 +1,4 @@
+import React from 'react'
 import AddToDiscordButton from "./AddToDiscordButton";
 import Marquee from "react-fast-marquee";
 import Gem_Emoji from "./Images/Gem_Emoji.png"

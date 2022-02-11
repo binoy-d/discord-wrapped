@@ -1,3 +1,4 @@
+import React from 'react'
 import Landing_Graph1 from "./Images/Landing_Graph1.png"
 import { Slide } from "react-awesome-reveal";
 

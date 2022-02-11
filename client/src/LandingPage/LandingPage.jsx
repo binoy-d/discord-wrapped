@@ -1,4 +1,7 @@
+
 import './LandingPage.css';
+import React from 'react'
+
 import HeroSection from './Sections/HeroSection';
 import Navbar from './Sections/Navbar';
 import MissionSection from './Sections/MissionSection';

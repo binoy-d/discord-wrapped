@@ -1,3 +1,5 @@
+import React from 'react'
+
 function AddToDiscordButton() {
     return (
         <a href="/add" className="add-to-discord-button">

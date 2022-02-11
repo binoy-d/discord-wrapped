@@ -1,3 +1,4 @@
+import React from 'react'
 import Landing_Charts1 from "./Images/Landing_Charts1.png"
 import { AiFillStar } from "react-icons/ai"
 import { Slide } from "react-awesome-reveal";
