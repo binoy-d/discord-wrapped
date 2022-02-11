@@ -1,11 +1,13 @@
 import React from 'react'
 import './App.css';
-import LandingPage from './LandingPage/LandingPage';
+import {Outlet} from "react-router-dom";
+import Navbar from './LandingPage/Sections/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <LandingPage />
+      <Navbar />
+      <Outlet />      
     </div>
   );
 }
