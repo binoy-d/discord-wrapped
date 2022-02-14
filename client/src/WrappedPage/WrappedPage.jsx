@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './WrappedPage.css';
 
 function WrappedPage() {
+  
+  const [key, setKey] = useState("")
+  
+  const handleSubmit = () => {
+    
+  }
   return (
     <div className="WrappedPage">
       <div className="container text-center">
@@ -14,7 +20,16 @@ function WrappedPage() {
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">#</span>
               </div>
-              <input type="text" className="form-control" placeholder="Super Secret Code" aria-label="Super Secret Code" aria-describedby="basic-addon1" />
+              <form onSubmit={handleSubmit}>
+              <input type="text" 
+              className="form-control"
+               placeholder="Super Secret Code"
+                aria-label="Super Secret Code"
+                 aria-describedby="basic-addon1"
+                 value={key}
+                 onChange={(e)=>setKey(e.target.value)} />
+              </form>
+              
             </div>
 
           </div>

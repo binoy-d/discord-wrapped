@@ -6,6 +6,10 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app)
 
+
+
+
+
 def _cors(response):
     '''Adds Access-Control-Allow-Origin header to response
 
@@ -18,6 +22,28 @@ def _cors(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+
+@app.route("/data", methods=['GET'])
+def data():
+    '''Gets data given a super secret key
+
+    Returns:
+        response object: contains object with keys for data
+    '''
+    key = request.args.get('key')
+    print(key)
+    if(key == "dabrian"):
+        response = {
+            "status": "success"
+        }
+        response = jsonify(response)
+        return _cors(response)
+    
+    response = {
+        "status": "invalid"
+    }
+    response = jsonify(response)
+    return _cors(response)
 
 @app.route("/members", methods = ['GET'])
 def members():
