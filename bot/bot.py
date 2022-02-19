@@ -20,10 +20,10 @@ botCommands = {} #Unused for now. Will be implemented in a help function later.
 dPATH = "data/"
 
 def get_prefix(bot, msg):
-    with open(dPATH + '.prefix.pkl', "rb") as ppkl:
-        prefixes = pickle.load(ppkl)
-
     try:
+        with open(dPATH + '.prefix.pkl', "rb") as ppkl:
+            prefixes = pickle.load(ppkl)
+
         return prefixes[str(msg.guild.id)]
     except:
         return ">>"
@@ -82,7 +82,6 @@ class Wrapped(commands.Cog):
 
     @commands.command(name="prefix", description="Changes the prefix for the server. Accepts up to 3 sequential characters.")
     async def _prefixChange(self, ctx, *, message: str):
-        
         if message:
             message = message.replace(" ", "") #trim spaces
             if(len(message) > 3):
@@ -90,6 +89,8 @@ class Wrapped(commands.Cog):
 
             async def button_callback(interact):
                 ci = interact.data['custom_id']
+                b1.disabled=True
+                b2.disabled=True
                 if(ci == "0"):
                     try:
                         with open(dPATH + '.prefix.pkl', "rb") as ppkl:
@@ -102,10 +103,10 @@ class Wrapped(commands.Cog):
 
                     ppkl = open(dPATH + '.prefix.pkl', "wb")
                     pickle.dump(prefixes, ppkl)
-
-                    await interact.response.edit_message(embed=genEmbed('', f'The prefix for this server is now **{message}**.'), view=None)
+                    
+                    await interact.response.edit_message(embed=genEmbed('', f'The prefix for this server is now **{message}**.'), view=view)
                 else:
-                    await interact.response.edit_message(embed=genEmbed('', f'The prefix for this server was not changed.'), view=None)
+                    await interact.response.edit_message(embed=genEmbed('', f'The prefix for this server was not changed.'), view=view)
 
             b1 = Button(label="Yes", style=discord.ButtonStyle.green, custom_id="0")
             b2 = Button(label="Decline", custom_id="1")
@@ -173,7 +174,7 @@ async def on_message(message):
             with open(dPATH + '.prefix.pkl', "rb") as ppkl:
                 prefixes = pickle.load(ppkl)
             
-            await message.channel.send(embed=genEmbed('', f'The current prefix for this server is **{prefixes[str(message.guild.id)]}**'))
+            await message.channel.send(embed=genEmbed('', f'The current prefix for this server is **{prefixes[str(message.guild.id)]}**\n'))
     except:
         pass
 
