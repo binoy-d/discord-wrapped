@@ -3,12 +3,17 @@ Scrape - Discord Cog
 Author: Evan Nguyen
 '''
 
+import asyncio
+
 import discord
 from discord.ext import commands
 from discord.ui import Button, View
 
+import datetime
+
 import pickle
 dPATH = "data/"
+SELF_ID = 931459553114083378 #got this through some debug command. don't know, but we need it.
 
 #-----------------------------------------------------------------
 def genEmbed(title, description=""):
@@ -30,7 +35,6 @@ def loadSetup():
 class Scrape(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.voice_states = {}
         self.desc = "Scrapes message data from available channels. Created as an extension for Discord-Wrapped."
 
     @commands.command(name="ping")
@@ -58,8 +62,6 @@ class Scrape(commands.Cog):
         if(channel):
             print(channel.name)
 
-
-
     @commands.command(name="setup")
     async def _setup(self, ctx):
         if(len(await ctx.channel.history(limit=2).flatten()) == 1):
@@ -85,11 +87,45 @@ class Scrape(commands.Cog):
             view.add_item(b1)
             view.add_item(b2)
 
-            await ctx.send(embed=genEmbed('', f'Requesting permission to setup in:```css\n{ctx.message.channel.name}```'), view=view)
+            setup = loadSetup()
+            try:
+                ch = ctx.guild.get_channel(setup[str(ctx.guild.id)])
+            except:
+                ch = None
+                pass
+
+            if(ch):
+                await ctx.send(embed=genEmbed('', f'The bot is currently setup in a different channel.\nRequesting permission to setup in: ```css\n{ctx.message.channel.name}```'), view=view)
+            else:
+                await ctx.send(embed=genEmbed('', f'Requesting permission to setup in:```css\n{ctx.message.channel.name}```'), view=view)
         else:
-            await ctx.send(embed=genEmbed("", f'This command requires an empty channel. Make a new channel or empty this one, {ctx.author.mention}.'), delete_after=10)
+            await ctx.send(embed=genEmbed('', f'This command requires an empty channel. Make a new channel or empty this one, {ctx.author.mention}.'), delete_after=10)
 
 
+    ##--------------------------------------------------------------------------------------------------
     ##DEFINE COMMANDS SPECIFIC TO THE SETUP CHANNEL. ONLY SHOULD BE USED IN THAT CHANNEL.
-    
 
+    #Cleans up excess messages left in the setup channel. 
+    #This function is a bit overkill. Kind of wanted a fallback measure in case the bot went offline for an extended period of time.
+    async def _cleanup(self, ctx):
+        setup = loadSetup()
+    
+        channel = ctx.guild.get_channel(setup[str(ctx.guild.id)])
+        messages = await channel.history(limit=300).flatten() 
+        #Hopefully, the bot isn't offline where >300 messages have occured.
+        for x in messages:
+            if(x.author.id != SELF_ID):
+                try:
+                    await x.edit(delete_after=10)
+                except:
+                    pass
+                await asyncio.sleep(1)
+
+    @commands.command(name="frequency")
+    async def _frequency(self, ctx):
+        setup = loadSetup()
+
+    #This is going to gauge our activity. If this exceeds a threshold, publish an update, and clean up the setup channel (if needed).
+    @commands.Cog.listener()
+    async def on_message(self, ctx):
+        await self._cleanup(ctx)

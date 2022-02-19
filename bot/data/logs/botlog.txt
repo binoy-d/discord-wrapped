@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "bot.py", line 184, in <module>
+    from scrape import *
+  File "/home/ubuntu/discord-wrapped/bot/scrape.py", line 92
+    async def 
+             ^
+SyntaxError: invalid syntax
