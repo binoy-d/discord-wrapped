@@ -58,6 +58,8 @@ class Scrape(commands.Cog):
         if(channel):
             print(channel.name)
 
+
+
     @commands.command(name="setup")
     async def _setup(self, ctx):
         if(len(await ctx.channel.history(limit=2).flatten()) == 1):
@@ -88,4 +90,6 @@ class Scrape(commands.Cog):
             await ctx.send(embed=genEmbed("", f'This command requires an empty channel. Make a new channel or empty this one, {ctx.author.mention}.'), delete_after=10)
 
 
+    ##DEFINE COMMANDS SPECIFIC TO THE SETUP CHANNEL. ONLY SHOULD BE USED IN THAT CHANNEL.
+    
 
