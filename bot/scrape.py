@@ -44,12 +44,13 @@ class Scrape(commands.Cog):
     async def _channelCheck(self, ctx):
         setup = loadSetup()
         
-        return ctx.message.channel == ctx.guild.get_channel(setup[str(ctx.guild.id)])
+        return ctx.message.channel == ctx.guild.get_channel(setup[str(ctx.guild.id)][0])
             
     async def channel_setup(self, ctx):
         setup = loadSetup()
 
-        setup[str(ctx.guild.id)] = ctx.message.channel.id
+        setup[str(ctx.guild.id)] = [ctx.message.channel.id] #Setup this way in case we need to store any further data. 
+                                                            #We would just append to this list.
 
         ppkl = open(dPATH + '.setup.pkl', "wb")
         pickle.dump(setup, ppkl)
@@ -58,9 +59,15 @@ class Scrape(commands.Cog):
     async def load_template(self, ctx):
         setup = loadSetup()
 
-        channel = ctx.guild.get_channel(setup[str(ctx.guild.id)])
+        try:
+            channel = ctx.guild.get_channel(setup[str(ctx.guild.id)][0])
+        except:
+            channel = None
+
         if(channel):
-            print(channel.name)
+            await ctx.send(embed=genEmbed('', f'The bot is currently setup in:```css\n{channel.name}```'))
+        else:
+            await ctx.send(embed=genEmbed('', f'The bot is not currently setup in any channel.'))
 
     @commands.command(name="setup")
     async def _setup(self, ctx):
@@ -89,13 +96,16 @@ class Scrape(commands.Cog):
 
             setup = loadSetup()
             try:
-                ch = ctx.guild.get_channel(setup[str(ctx.guild.id)])
+                ch = ctx.guild.get_channel(setup[str(ctx.guild.id)][0])
             except:
                 ch = None
                 pass
 
             if(ch):
-                await ctx.send(embed=genEmbed('', f'The bot is currently setup in a different channel.\nRequesting permission to setup in: ```css\n{ctx.message.channel.name}```'), view=view)
+                if(ch == ctx.channel):
+                    await ctx.send(embed=genEmbed('', f'The bot is already setup in this channel.'), delete_after=10)
+                else:
+                    await ctx.send(embed=genEmbed('', f'The bot is currently setup in a different channel.\nRequesting permission to setup in: ```css\n{ctx.message.channel.name}```'), view=view)
             else:
                 await ctx.send(embed=genEmbed('', f'Requesting permission to setup in:```css\n{ctx.message.channel.name}```'), view=view)
         else:
@@ -109,23 +119,80 @@ class Scrape(commands.Cog):
     #This function is a bit overkill. Kind of wanted a fallback measure in case the bot went offline for an extended period of time.
     async def _cleanup(self, ctx):
         setup = loadSetup()
-    
-        channel = ctx.guild.get_channel(setup[str(ctx.guild.id)])
-        messages = await channel.history(limit=300).flatten() 
-        #Hopefully, the bot isn't offline where >300 messages have occured.
-        for x in messages:
-            if(x.author.id != SELF_ID):
-                try:
-                    await x.edit(delete_after=10)
-                except:
-                    pass
-                await asyncio.sleep(1)
+        if(str(ctx.guild.id) in setup.keys()):
+            channel = ctx.guild.get_channel(setup[str(ctx.guild.id)][0])
 
-    @commands.command(name="frequency")
-    async def _frequency(self, ctx):
-        setup = loadSetup()
+            if(ctx.channel == channel):
+                messages = await channel.history(limit=300).flatten() 
+                #Hopefully, the bot isn't offline where >300 messages have occured.
+                for x in messages:
+                    if(x.author.id != SELF_ID):
+                        try:
+                            await x.edit(delete_after=10)
+                        except:
+                            pass
+                        await asyncio.sleep(1)
 
     #This is going to gauge our activity. If this exceeds a threshold, publish an update, and clean up the setup channel (if needed).
+    #So far, this is makeshift. I can't figure out a way to monitor when we should update, so for now it'll be manual. 
+    #This block basically cleans all messages in the setup channel after 10 seconds.
     @commands.Cog.listener()
     async def on_message(self, ctx):
         await self._cleanup(ctx)
+
+    #Whenever the bot's template is compromised- cleanup.
+    async def _cleanupAll(self, ctx):
+        setup = loadSetup()
+        if(str(ctx.guild.id) in setup.keys()):
+            channel = ctx.guild.get_channel(setup[str(ctx.guild.id)][0])
+
+            if(ctx.channel == channel):
+                messages = await channel.history(limit=300).flatten() 
+                for x in messages:
+                    try:
+                        await x.edit(delete_after=10)
+                    except:
+                        pass
+
+    @commands.command(name="dumpch")
+    async def _load_channeldata(self, ctx):
+        bar = "▏▎▍▋▊▉"
+        out = ""
+        raw = ctx.guild.by_category()
+        
+        setup = loadSetup()
+
+        for categoryList in raw:
+            for channels in categoryList[1:]:
+                for singleChannel in channels:
+                    if isinstance(singleChannel, discord.channel.TextChannel):
+                        l = await singleChannel.history(limit=None).flatten()
+                        print(len(l))
+
+        for categoryList in raw:
+            cat = categoryList[0] #"―"
+            out += f"\n{cat}\n{''.ljust(40, '―')}\n"
+            for channels in categoryList[1:]:
+                for singleChannel in channels:
+                    out += f"{''.ljust(2, ' ')}[x] {singleChannel.name}\n"
+                    out += f"{''.ljust(2, ' ')};―――― \n"
+            
+        print(out)
+
+    async def _publish(self, ctx):
+        setup = loadSetup()
+        if(str(ctx.guild.id) in setup.keys()):
+            channel = ctx.guild.get_channel(setup[str(ctx.guild.id)][0])
+            with open("data/wrapped.png", "rb") as fi:
+                f = discord.File(fi, filename="data/wrapped.png")
+
+            banner = await channel.send(file=f)
+            setup[str(ctx.guild.id)][1] = banner.id
+
+            ppkl = open(dPATH + '.setup.pkl', "wb")
+            pickle.dump(setup, ppkl)
+
+
+    #async def _verify(self, ctx):
+
+        
