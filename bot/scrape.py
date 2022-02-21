@@ -12,6 +12,8 @@ from discord.ui import Button, View
 import datetime
 
 import pickle
+import pandas as pd
+
 dPATH = "data/"
 SELF_ID = 931459553114083378 #got this through some debug command. don't know, but we need it.
 
@@ -55,7 +57,7 @@ class Scrape(commands.Cog):
         ppkl = open(dPATH + '.setup.pkl', "wb")
         pickle.dump(setup, ppkl)
 
-    @commands.command(name="debug")
+    @commands.command(name="status")
     async def load_template(self, ctx):
         setup = loadSetup()
 
@@ -154,20 +156,77 @@ class Scrape(commands.Cog):
                     except:
                         pass
 
+    @commands.command(name="debug")
+    async def _debug(self, ctx):
+        m = ctx.message
+        print(m.guild.id, 
+        m.id, 
+        m.type,
+        m.created_at,
+        m.edited_at,
+        m.pinned,
+        m.content,
+        m.author.id,
+        m.author.bot,
+        m.author.avatar,
+        m.attachments,
+        m.mentions,
+        m.reactions)
+
+    @commands.command(name="fullscan")
+    async def _process_data(self, ctx):
+        setup = loadSetup()
+
+        formatting = ['guild_id', 'message_id', 'type', 'created_at', 'edited_at', 'isPinned', 'content', 
+                    'author_id', 'is_bot', 'avatar_url', 'attachments', 'mentions', 'reactions']
+        
+        data = pd.DataFrame(columns=formatting)
+
+        cache = {}
+        total = 0
+
+        now = datetime.datetime.now()
+        print("initializing full scan at", now)
+
+        raw = ctx.guild.by_category()
+        for categoryList in raw:
+            for channels in categoryList[1:]:
+                for singleChannel in channels:
+                    if isinstance(singleChannel, discord.channel.TextChannel):
+                        #cache[str(singleChannel.id)] = 
+
+                        for m in await singleChannel.history(limit=None).flatten():
+                            total += 1
+                            try:
+                                data = data.append({
+                                    'guild_id': m.guild.id,
+                                    'message_id': m.id,
+                                    'type': m.type,
+                                    'created_at': m.created_at,
+                                    'edited_at': m.edited_at,
+                                    'isPinned': m.pinned,
+                                    'content': m.content,
+                                    'author_id': m.author.id,
+                                    'is_bot': m.author.bot,
+                                    'avatar_url': m.author.avatar,
+                                    'attachments': m.attachments,
+                                    'mentions': m.mentions,
+                                    'reactions': m.reactions
+                                }, ignore_index=True)
+                            except:
+                                pass
+        
+        end = datetime.datetime.now()
+        print("finished in", end - now)
+        data.to_csv(f'data/guilds/{ctx.guild.id}.csv')
+                            
     @commands.command(name="dumpch")
-    async def _load_channeldata(self, ctx):
+    async def _load_channeldata(self, ctx, data=[]):
         bar = "▏▎▍▋▊▉"
         out = ""
         raw = ctx.guild.by_category()
         
         setup = loadSetup()
-
-        for categoryList in raw:
-            for channels in categoryList[1:]:
-                for singleChannel in channels:
-                    if isinstance(singleChannel, discord.channel.TextChannel):
-                        l = await singleChannel.history(limit=None).flatten()
-                        print(len(l))
 
         for categoryList in raw:
             cat = categoryList[0] #"―"
@@ -176,8 +235,9 @@ class Scrape(commands.Cog):
                 for singleChannel in channels:
                     out += f"{''.ljust(2, ' ')}[x] {singleChannel.name}\n"
                     out += f"{''.ljust(2, ' ')};―――― \n"
-            
-        print(out)
+        
+        return out
+    
 
     async def _publish(self, ctx):
         setup = loadSetup()
